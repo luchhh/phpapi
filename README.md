@@ -14,14 +14,14 @@ Un simple ejercicio de API RESTful con Vanilla PHP
 
 ## Instalación
 
-1 Desde consola de comando y en el directorio de instalación ejecutar: `git clone https://github.com/luchhh/phpapi.git`
-2 Explorar el código descargado con nuestro Editor de Código
-3 Instalar la base de datos de ejemplo: `data_ejemplo.sql`
-4 Copiar el archivo `config.php.ejemplo` a `config.php`
-5 Modificar el archivo `config.php` con los datos de base de datos y URL de la aplicación correctos
-6 Acceder mediante la URL `http://localhost/phpapi/libros/`
+1. Desde consola de comando y en el directorio de instalación ejecutar: `git clone https://github.com/luchhh/phpapi.git`
+2. Explorar el código descargado con nuestro Editor de Código
+3. Instalar la base de datos de ejemplo: `data_ejemplo.sql`
+4. Copiar el archivo `config.php.ejemplo` a `config.php`
+5. Modificar el archivo `config.php` con los datos de base de datos y URL de la aplicación correctos
+6. Acceder mediante la URL `http://localhost/phpapi/libros/`
 
-##Uso de la API
+## Uso de la API
 
 - El endpoint de esta API es `/libros/?`. Pueden pasarse los siguientes parámetros:
 	- `ini`: El número de página a mostrar. Por defecto 1.
