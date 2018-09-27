@@ -1,0 +1,197 @@
+swagger: '2.0'
+info:
+  description: Un simple ejercicio de API RESTful con Vanilla PHP
+  version: 1.0.0
+  title: API Libros
+  license:
+    name: Licencia Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost
+basePath: /phpapi
+tags:
+  - name: libro
+    description: Operaciones sobre Libro
+schemes:
+  - https
+  - http
+paths:
+  /libros:
+    get:
+      tags:
+        - libro
+      summary: Busca libros en el repositorio
+      description: ''
+      operationId: buscarLibro
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: lim
+          in: query
+          description: Número de objetos a retornar en la búsqueda
+          default: 10
+          required: false
+          type: integer
+          format: int64
+        - name: ini
+          in: query
+          description: >-
+            El número de página a mostrar en la búsqueda. Funciona como offset.
+            Si lim=10 e ini=2 entonces se mostrarán los elementos 11 al 20. Si
+            lim=5 e ini=4 se mostrarán los resultados 16 al 20
+          default: 1
+          required: false
+          type: integer
+          format: int64
+        - name: ord
+          in: query
+          description: >-
+            Las propiedades sobre las cuales se ordenarán los resultados. Es
+            posible anidar propiedades usando coma(,)
+            propiedad1,propiedad2,propiedad3. Es posible utilizar el signo menos
+            (-) para declarar que los resultados deben ser ordenados de manera
+            descendente en esa propiedad. Ejemplo ?ord=nombre,-creada ordenará
+            la búsqueda por nombre de manera ascendete y fecha de creación de
+            manera descendente
+          required: false
+          type: string
+        - name: q
+          in: query
+          description: >-
+            Filtro de la búsqueda. Filtra aquellos recursos cuyo nombre o
+            descripción contengan la cadena "q"
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Operación exitosa
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Libro'
+        '400':
+          description: Parámetro X incorrecto
+    post:
+      tags:
+        - libro
+      summary: Añade un nuevo libro al repositorio
+      description: ''
+      operationId: crearLibro
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Objeto libro que se espera
+          required: true
+          schema:
+            $ref: '#/definitions/Libro'
+      responses:
+        '200':
+          description: Operación exitosa
+          schema:
+            $ref: '#/definitions/Libro'
+        '400':
+          description: Parámetro X incorrecto
+  '/libros/{libroId}':
+    get:
+      tags:
+        - libro
+      summary: 'Retorna un libro con ID {libroId}'
+      description: ''
+      operationId: getLibro
+      produces:
+        - application/json
+      parameters:
+        - name: libroId
+          in: path
+          description: ID del libro a retornar
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Operación exitosa
+          schema:
+            $ref: '#/definitions/Libro'
+        '404':
+          description: Libro no encontrado
+    put:
+      tags:
+        - libro
+      summary: Actualiza la información de un Libro
+      description: ''
+      operationId: actualizaLibro
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: libroId
+          in: path
+          description: ID del libro a actualizar
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Objeto libro que se espera
+          required: true
+          schema:
+            $ref: '#/definitions/Libro'
+      responses:
+        '200':
+          description: Operación exitosa
+          schema:
+            $ref: '#/definitions/Libro'
+        '404':
+          description: Libro no encontrado
+        '400':
+          description: Parámetro X incorrecto
+    delete:
+      tags:
+        - libro
+      summary: Elimina un Libro (PDTE de Implementar)
+      description: ''
+      operationId: eliminaLibro
+      produces:
+        - application/json
+      parameters:
+        - name: libroId
+          in: path
+          description: ID del libro a eliminar
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Operación exitosa
+        '404':
+          description: Libro no encontrado
+definitions:
+  Libro:
+    type: object
+    required:
+      - nombre
+      - descripcion
+      - url
+    properties:
+      id:
+        type: integer
+        format: int64
+      nombre:
+        type: string
+        example: El viejo y el mar
+      descripcion:
+        type: string
+        example: >-
+          Escrita por Ernest Miller Hemingway en 1951 en Cuba y publicada en
+          1952. Fue su último trabajo de ficción importante publicado
+      url:
+        type: string
+        example: 'https://books.google.es/books?id=5-lsDwAAQBAJ&printsec=frontcover'
+    xml:
+      name: Libro

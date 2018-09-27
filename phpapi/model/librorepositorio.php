@@ -5,7 +5,7 @@ use Phpapi\DB;
 use Phpapi\PaginadorREST;
 use PDO;
 
-class Repositorio{
+class LibroRepositorio{
  
     //propiedades para paginación
     public $default_ini;

@@ -8,5 +8,3 @@ RewriteRule ^libros/?$ phpapi/controller/libros.php [NC,L]
 RewriteRule ^libros/([0-9]+)/?$ phpapi/controller/libros_id.php?id=$1 [NC,L]
 #RewriteRule ^libros/[A-Za-z0-9-\s]/?$ libros.php?name=$1 [NC,L]
 #RewriteRule ^libros/()?<!!results=).*@.*)$/?$ libros.php?email=$1 [R=301,L]
-
-#ErrorDocument 400 /unea/phpapi/error.php

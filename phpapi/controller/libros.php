@@ -3,7 +3,7 @@ include_once(__DIR__."/../../autoload.php");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-use Phpapi\Model\Repositorio;
+use Phpapi\Model\LibroRepositorio;
 use Phpapi\Model\Libro;
 use Phpapi\PaginadorREST;
 
@@ -12,7 +12,7 @@ $cuerpo = json_decode(file_get_contents('php://input'),true);
 
 switch($metodo){
         case "GET":
-            $repo = new Repositorio();
+            $repo = new LibroRepositorio();
             $libros = $repo->buscar($_GET);
             if(sizeof($libros)==0){
                 header("HTTP/1.0 404 Not Found");
